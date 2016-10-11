@@ -25,5 +25,5 @@ for img in xrange(NUM_IMAGES):
 values1[:] = [values1[i] / counts[i] for i in xrange(10)]
 values2[:] = [values2[i] / counts[i] for i in xrange(10)]
 
-print values1
-print values2
+print (values1)
+print (values2)

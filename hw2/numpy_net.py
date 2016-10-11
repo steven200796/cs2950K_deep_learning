@@ -32,7 +32,7 @@ class NeuralNet:
         softmax /= np.sum(softmax)
         error = -np.log(softmax[label])
 
-        dedh = np.matrix([softmax.item(j) if j != label else softmax.item(j) - 1 for j in xrange(digits)])
+        dedh = np.matrix([softmax.item(j) if j != label else softmax.item(j) - 1 for j in range(digits)])
 
         dedw = dedh.T * img.T
 
@@ -48,18 +48,18 @@ class NeuralNet:
 
 net = NeuralNet()
 # forward step
-for _ in xrange(10000):
+for _ in range(10000):
     label = struct.unpack('B', train_labels.read(1))[0]
     img = np.divide(np.matrix(struct.unpack('784B', train_data.read(NUM_PIXELS)), dtype=float).T, 255)
     net.train(img, label)
 
 correct = [0] * NUM_TEST_IMAGES
 
-for i in xrange(NUM_TEST_IMAGES):
+for i in range(NUM_TEST_IMAGES):
     label = struct.unpack('B', test_labels.read(1))[0]
     img = np.divide(np.matrix(struct.unpack('784B', test_data.read(NUM_PIXELS)), dtype=float).T, 255)
     if net.classify(img) == int(label):
         correct[i] = 1
-print float(sum(correct)) / NUM_TEST_IMAGES * 100, "% accuracy"
+print (float(sum(correct)) / NUM_TEST_IMAGES * 100, "% accuracy")
 
 
